@@ -1,27 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Header  from 'react-native/Libraries/NewAppScreen';
 
 export default function App() {
   return (
     <View style={styles.container}>
-    <View style={styles.header}>
+      <View style={styles.header}>
         <View style={styles.bolinha}>
           <Image source={require('./assets/helloKitty.jpeg')} style={styles.imageBackground}></Image>
         </View>
         <Text style={styles.texto}>Hello Kitty Cozinheira</Text>
         <StatusBar style="auto" />
-
-        
       </View>
-    <View style={styles.menu}>
-     <Text style={styles.titulo}> Receita de bolo da Kitty </Text>
-     
-     <StatusBar style="auto" />
-    </View>
-    <View style={styles.rodape}>
-     <Text style={styles.texto}> Kitty Copy 2024 </Text>
-     <StatusBar style="auto" />
-     </View>
+      <View style={styles.menu}>
+        <LinearGradient
+          colors={['#ffd2d2', '#ffc3c3', '#faacc4']} style={styles.menu}
+        >
+          <Text style={styles.titulo}> Receita de bolo da Kitty </Text>
+        </LinearGradient>
+        <StatusBar style="auto" />
+      </View>
+      <View style={styles.rodape}>
+        <Text style={styles.texto}> Kitty Copy 2024 </Text>
+        <StatusBar style="auto" />
+      </View>
     </View>
   );
 }
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     width: '100%',
-    backgroundColor: '#faacc4',
+    backgroundColor: '#ffd2d2',
     alignItems: 'center',
     flexDirection: 'row',
   },
@@ -53,14 +56,14 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginHorizontal: 10,
   },
-  texto:{
+  texto: {
     color: '#8c2641',
     fontSize: 30,
   },
-  titulo:{
+  titulo: {
     fontSize: 40,
-    color: '#f32634',
-    fontWeight: 10,
+    color: '#f3f3f3',
+    fontWeight: 100,
   },
   menu: {
     flex: 4,
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-   rodape: {
+  rodape: {
     flex: 1,
     backgroundColor: '#faacc4',
     alignItems: 'center',
