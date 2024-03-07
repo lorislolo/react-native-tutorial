@@ -10,7 +10,6 @@ const H1 = ({title, children}) => {
 const styles = StyleSheet.create({
      h1: {
         fontSize: 30,
-        fontWeigth: 'bold',
         color: '#f3f3f3'
     }
 })

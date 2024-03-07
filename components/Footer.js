@@ -39,14 +39,12 @@ const styles = StyleSheet.create({
       marginHorizontal: 10,
     },
     texto: {
-      color: '#8c2641',
+      color: '#f3f3f3',
       fontSize: 30,
     },
     titulo: {
       fontSize: 40,
-      color: '#f3f3f3',
-      fontWeight: 100,
-    },
+      color: '#f3f3f3'    },
     menu: {
       flex: 4,
       backgroundColor: '#f2ced8',

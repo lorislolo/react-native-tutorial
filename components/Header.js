@@ -39,9 +39,7 @@ const styles = StyleSheet.create({
   },
   titulo: {
     fontSize: 40,
-    color: '#f3f3f3',
-    fontWeight: 100,
-  },
+    color: '#f3f3f3'  },
   menu: {
     flex: 4,
     backgroundColor: '#f2ced8',
