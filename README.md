@@ -9,7 +9,7 @@ npx create-expo-app --template
 
 1) Baixar o Expo Go (Aplicativo mobile que serve como um "emulador")
 
-2) Instalar o tunnel (serve para conectar mesmo se o computador e o celular estiverem conectados em redes diferentes)
+2) Instalar o tunnel (No caso do IF alterar o script start no package.json para o seguinte comando)
 
 ```
 expo start --tunnel

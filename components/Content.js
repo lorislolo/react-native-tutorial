@@ -3,6 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import H1 from './ui/H1.js';
 import CardUser from './CardUser.js';
+import { useEffect } from 'react'
 
 
 const users = [
@@ -45,6 +46,20 @@ const users = [
 ]
 
 const Content = () => {
+    const getUsers = async () =>{
+        try{
+          const result = await fetch('https://backend-api-express-i1oj.onrender.com')
+          const data = await result.json()
+          console.log(data[0].nome_social)
+        } catch (error){
+          console.log(error.message)
+        }
+      }
+    
+      useEffect(()=>{
+        getUsers()
+      },[])
+    
     return (
         <View style={styles.menu}>
             <LinearGradient
