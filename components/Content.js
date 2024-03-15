@@ -1,4 +1,5 @@
 import { StyleSheet, View, FlatList, Text } from 'react-native';
+import Button from './ui/Button'
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import H1 from './ui/H1.js';
@@ -9,6 +10,9 @@ import CardProduct from './CardProduct.js';
 
 const Content = () => {
     const [users, setUsers] = useState([])
+    const [products, setProducts] = useState([])
+    const [counter, setCounter] = useState(0)
+
     const getUsers = async () => {
         try {
             const result = await fetch('https://backend-api-express-i1oj.onrender.com/user')
@@ -23,7 +27,6 @@ const Content = () => {
         getUsers()
     }, [])
 
-    const [products, setProducts] = useState([])
     const getProducts = async () => {
         try {
             const result = await fetch('https://backend-api-express-i1oj.onrender.com/product')
@@ -45,28 +48,40 @@ const Content = () => {
             >
                 <H1 title="Meus usuários" />
                 <View style={styles.listUser}>
-                    <FlatList
-                        data={users}
-                        renderItem={({ item }) => <CardUser user={item} />}
-                        keyExtractor={item => item.id}
-                        horizontal={true}
-                    />
+                    {users.length ?
+                        <FlatList
+                            data={users}
+                            renderItem={({ item }) => <CardUser user={item} />}
+                            keyExtractor={item => item.id}
+                            horizontal={true}
+                        /> :
+                        <Text style={{ color: '#FFF' }}>Loading...</Text>}
                 </View>
 
                 <H1>Produtos</H1>
                 <View style={styles.listUser}>
-                    <FlatList
-                        data={products}
-                        renderItem={({ item }) => <CardProduct product={item} />}
-                        keyExtractor={item => item.id}
-                        // horizontal={true}
-                    />
+                    {
+                        products.length ?
+                            <FlatList
+                                data={products}
+                                renderItem={({ item }) => <CardProduct product={item} />}
+                                keyExtractor={item => item.id}
+                                
+                            />
+                            
+                            :
+                            <Text style={{ color: '#FFF' }}>Loading...</Text>
+                    }
+                    <Button
+                                title="Add +1"
+                                onPress={() => setCounter(counter +1)}
+                                />
                 </View>
             </LinearGradient>
             <StatusBar style="auto" />
 
         </View>
-        
+
     )
 }
 
