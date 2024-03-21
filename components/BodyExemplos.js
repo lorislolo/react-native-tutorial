@@ -1,5 +1,5 @@
-import { StyleSheet, View, FlatList, Text } from 'react-native';
-import Button from './ui/Button'
+import { StyleSheet, View, FlatList, Text, TextInput } from 'react-native';
+import Button from './ui/Button.js'
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import H1 from './ui/H1.js';
@@ -8,7 +8,11 @@ import { useEffect, useState } from 'react'
 import CardProduct from './CardProduct.js';
 
 
-const Content = () => {
+const BodyExemplos = () => {
+    const [txtName, setTxtName] = useState('')
+  const [txtEmail, setTxtEmail] = useState('')
+  const [txtAvatar, setTxtAvatar] = useState('')
+
     const [users, setUsers] = useState([])
     const [products, setProducts] = useState([])
     const [counter, setCounter] = useState(0)
@@ -20,7 +24,7 @@ const Content = () => {
             console.log(data.success)
             setUsers(data.users)
         } catch (error) {
-            console.log(error.message)
+            console.log('Error getUsers ' + error.message)
         }
     }
     useEffect(() => {
@@ -34,9 +38,27 @@ const Content = () => {
             console.log(data.success)
             setProducts(data.products)
         } catch (error) {
-            console.log(error.message)
+            console.log('Error getProducs ' + error.message)
         }
     }
+
+    const postUser = async () =>{
+        try{
+          const result = await fetch('https://backend-api-express-i1oj.onrender.com/user', {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+              },
+            body: JSON.stringify({name: txtName, email: txtEmail, avatar: txtAvatar})
+          })
+          const data = await result.json()
+          console.log(data)
+          getUsers()
+        } catch (error){
+          console.log('Error postUser ' +error.message)
+        }
+      } 
+
     useEffect(() => {
         getProducts()
     }, [])
@@ -46,6 +68,28 @@ const Content = () => {
             <LinearGradient
                 colors={['#b23643', '#b22a39', '#a4003d']} style={styles.menu}
             >
+                <TextInput 
+          style={styles.input}
+          onChangeText={setTxtName}
+          value={txtName}
+          placeholder='Nome'
+        />
+        <TextInput 
+          style={styles.input}
+          onChangeText={setTxtEmail}
+          value={txtEmail}
+          placeholder='Email'
+        />
+        <TextInput 
+          style={styles.input}
+          onChangeText={setTxtAvatar}
+          value={txtAvatar}
+          placeholder='Foto de Perfil'
+        />
+        <Button 
+          title="Cadastrar Usuário"
+          onPress={postUser}
+        />
                 <H1 title="Meus usuários" />
                 <View style={styles.listUser}>
                     {users.length ?
@@ -72,11 +116,12 @@ const Content = () => {
                             :
                             <Text style={{ color: '#FFF' }}>Loading...</Text>
                     }
-                    <Button
+                    
+                </View>
+                <Button
                                 title="Add +1"
                                 onPress={() => setCounter(counter +1)}
                                 />
-                </View>
             </LinearGradient>
             <StatusBar style="auto" />
 
@@ -132,8 +177,17 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     },
     listUser: {
-        height: 120
-    }
+        height: 120,
+        width: "100%"
+    },
+input: {
+  height: 40,
+  width: 300,
+  backgroundColor: '#FFF',
+  margin: 12,
+  borderWidth: 1,
+  padding: 10,
+}
 });
 
-export default Content;
+export default BodyExemplos;
