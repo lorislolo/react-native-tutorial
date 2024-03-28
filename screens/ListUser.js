@@ -1,14 +1,13 @@
-import {StyleSheet, View } from 'react-native';
-import Header from '../components/Header.js';
-import Footer from '../components/Footer.js';
-import Body from '../components/Body.js';
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, View, ImageBackground, ScrollView} from 'react-native'
+import Body from '../components/Body'
 
 const ListUser = () => {
   return (
-    <View style={styles.container}>
-      <Header/>
-      <Body/>
-      <Footer />
+    <View>
+      
+        <Body />
+      <StatusBar style="light" />
     </View>
   );
 }
@@ -16,11 +15,13 @@ const ListUser = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'center'
+  },
+  bg: {
+    flex: 1,
+    width: '100%',
     justifyContent: 'center',
-    margin: 0
   }
-})
+});
 
 export default ListUser
