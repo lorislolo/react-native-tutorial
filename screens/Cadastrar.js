@@ -2,15 +2,17 @@ import { useState } from 'react'
 import {View, TextInput, StyleSheet, ScrollView} from 'react-native'
 import Button from '../components/ui/Button'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import useUserStore from '../stores/userStore.js'
+
 
 const Cadastrar = () => {
     const navigation = useNavigation()
-    const route = useRoute()
-    const {users, setUsers} = route.params
+    const addUser = useUserStore((state) => state.addUser)
 
     const [txtName, setTxtName] = useState('')
     const [txtEmail, setTxtEmail] = useState('')
     const [txtAvatar, setTxtAvatar] = useState('')
+    const [txtPass, setTxtPass] = useState('')
 
     const postUser = async () =>{
         try{
@@ -19,12 +21,12 @@ const Cadastrar = () => {
             headers:{
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({name: txtName, email: txtEmail, avatar: txtAvatar})
+            body: JSON.stringify({name: txtName, email: txtEmail, pass: txtPass, avatar: txtAvatar})
           })
           const data = await result.json()
           console.log(data)
           if(data?.success){
-            setUsers([...users, data.user])
+            addUser(data.user)
             navigation.goBack()
           } else {
             alert(data.error)
@@ -49,6 +51,12 @@ const Cadastrar = () => {
                 placeholder='Email...'
                 onChangeText={setTxtEmail}
                 value={txtEmail}
+                />
+                <TextInput 
+                style={styles.input}
+                placeholder='Senha...'
+                onChangeText={setTxtPass}
+                value={txtPass}
                 />
                 <TextInput 
                 style={styles.input}
